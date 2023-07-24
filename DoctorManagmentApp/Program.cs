@@ -1,8 +1,10 @@
 using AutoMapper;
 using DoctorManagmentApp.Data;
 using DoctorManagmentApp.Model.AutoMapper;
+using DoctorManagmentApp.Model.Dto;
 using DoctorManagmentApp.Services;
 using DoctorManagmentApp.Services.Interface;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +18,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddCors();
 
+#region Dependency Injection
+
 builder.Services.AddScoped<IPatientService, PatientService>();
+
+#endregion
+
+
+#region FluentValidation
+
+builder.Services.AddScoped<IValidator<PatientDtoNoPK>, PatientDtoNoPKValidator>();
+
+#endregion
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

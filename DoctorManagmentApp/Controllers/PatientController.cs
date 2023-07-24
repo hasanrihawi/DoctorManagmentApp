@@ -1,6 +1,7 @@
-﻿using DoctorManagmentApp.Data;
+﻿using DoctorManagmentApp.Model;
 using DoctorManagmentApp.Model.Dto;
 using DoctorManagmentApp.Services.Interface;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoctorManagmentApp.Controllers
@@ -9,39 +10,45 @@ namespace DoctorManagmentApp.Controllers
     [ApiController]
     public class PatientController : ControllerBase
     {
-        private readonly ApplicationDbContext context;
         private readonly IPatientService patientService;
+        private readonly IValidator<PatientDtoNoPK> validator;
 
-        public PatientController(ApplicationDbContext context, IPatientService patientService)
+        public PatientController(IPatientService patientService, IValidator<PatientDtoNoPK> validator)
         {
-            this.context = context;
             this.patientService = patientService;
+            this.validator = validator;
         }
 
         // GET: api/Patient
         [HttpGet]
-        public ActionResult<List<PatientDto>> GetPatients()
+        public IActionResult GetPatients()
         {
-            return patientService.GetPatients();
+            var patients = patientService.GetPatients();
+            return Ok(ApiResponse.SuccessResponse(patients));
         }
 
         // GET: api/Patient/5
         [HttpGet("{id}")]
-        public ActionResult<PatientDto> GetPatient(int id)
+        public IActionResult GetPatient(int id)
         {
             var patient = patientService.GetPatientById(id);
             if (patient == null)
-                return NotFound();
+                return NotFound(ApiResponse.FailResponse());
 
-            return patient;
+            return Ok(ApiResponse.SuccessResponse(patient));
         }
 
         // POST: api/Patient
         [HttpPost]
-        public ActionResult<PatientDto> CreatePatient(PatientDtoNoPK patient)
+        public async Task<IActionResult> CreatePatient(PatientDtoNoPK patient)
         {
+            var result = await validator.ValidateAsync(patient);
+
+            if (!result.IsValid)
+                return BadRequest(ApiResponse.FailResponse(result.Errors.Select(x => x.ErrorMessage).ToList()));
+            
             var createdPatient = patientService.CreatePatient(patient);
-            return CreatedAtAction(nameof(GetPatient), new { id = createdPatient.Id }, createdPatient);
+            return CreatedAtAction(nameof(GetPatient), new { id = createdPatient.Id }, ApiResponse.SuccessResponse(createdPatient));
         }
 
         // PUT: api/Patient/5
@@ -51,7 +58,7 @@ namespace DoctorManagmentApp.Controllers
             var isUpdated = patientService.UpdatePatient(id, updatedPatient);
 
             if (!isUpdated)
-                return NotFound();
+                return NotFound(ApiResponse.FailResponse());
 
             return NoContent();
         }
@@ -63,10 +70,9 @@ namespace DoctorManagmentApp.Controllers
             var isDeleted = patientService.DeletePatient(id);
 
             if (!isDeleted)
-                return NotFound();
+                return NotFound(ApiResponse.FailResponse());
 
             return NoContent();
         }
     }
-
 }
