@@ -2,7 +2,7 @@
 
 namespace DoctorManagmentApp.Model.Dto
 {
-    public class DoctorDtoCreate
+    public class DoctorDtoNoPK
     {
         [Required]
         public string Name { get; set; }

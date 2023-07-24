@@ -28,7 +28,7 @@ namespace DoctorManagmentApp.Services
             return patient == null ? null : mapper.Map<PatientDto>(patient);
         }
 
-        public PatientDto CreatePatient(PatientDtoCreate patient)
+        public PatientDto CreatePatient(PatientDtoNoPK patient)
         {
             var mappedPatient = mapper.Map<Patient>(patient);
             context.Patients.Add(mappedPatient);
@@ -36,7 +36,7 @@ namespace DoctorManagmentApp.Services
             return mapper.Map<PatientDto>(mappedPatient);
         }
 
-        public bool UpdatePatient(int id, PatientDto patient)
+        public bool UpdatePatient(int id, PatientDtoNoPK patient)
         {
             var existingPatient = context.Patients.Find(id);
             if (existingPatient == null)

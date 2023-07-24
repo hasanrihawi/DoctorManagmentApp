@@ -8,12 +8,12 @@ namespace DoctorManagmentApp.Model.AutoMapper
         public AutoMapProfile()
         {
             CreateMap<Appointment, AppointmentDto>();
-            CreateMap<AppointmentDtoCreate, Appointment>();
+            CreateMap<AppointmentDtoNoPK, Appointment>();
             CreateMap<AppointmentDto, Appointment>();
 
 
             CreateMap<Patient, PatientDto>();
-            CreateMap<PatientDtoCreate, Patient>();
+            CreateMap<PatientDtoNoPK, Patient>();
             CreateMap<PatientDto, Patient>();
 
         }

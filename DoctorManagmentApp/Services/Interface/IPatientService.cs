@@ -9,9 +9,9 @@ namespace DoctorManagmentApp.Services.Interface
 
         public PatientDto GetPatientById(int id);
 
-        public PatientDto CreatePatient(PatientDtoCreate patient);
+        public PatientDto CreatePatient(PatientDtoNoPK patient);
 
-        bool UpdatePatient(int id, PatientDto patient);
+        bool UpdatePatient(int id, PatientDtoNoPK patient);
 
         bool DeletePatient(int id);
     }

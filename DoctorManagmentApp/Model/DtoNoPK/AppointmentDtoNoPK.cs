@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DoctorManagmentApp.Model.Dto
 {
-    public class AppointmentDtoCreate
+    public class AppointmentDtoNoPK
     {
         public int PatientID { get; set; }
 

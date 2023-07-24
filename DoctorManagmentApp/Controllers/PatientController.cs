@@ -38,7 +38,7 @@ namespace DoctorManagmentApp.Controllers
 
         // POST: api/Patient
         [HttpPost]
-        public ActionResult<PatientDto> CreatePatient(PatientDtoCreate patient)
+        public ActionResult<PatientDto> CreatePatient(PatientDtoNoPK patient)
         {
             var createdPatient = patientService.CreatePatient(patient);
             return CreatedAtAction(nameof(GetPatient), new { id = createdPatient.Id }, createdPatient);
@@ -46,7 +46,7 @@ namespace DoctorManagmentApp.Controllers
 
         // PUT: api/Patient/5
         [HttpPut("{id}")]
-        public IActionResult UpdatePatient(int id, PatientDto updatedPatient)
+        public IActionResult UpdatePatient(int id, PatientDtoNoPK updatedPatient)
         {
             var isUpdated = patientService.UpdatePatient(id, updatedPatient);
 
