@@ -1,8 +1,5 @@
 ﻿using DoctorManagmentApp.Model;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Reflection.Emit;
 
 namespace DoctorManagmentApp.Data
 {
@@ -40,6 +37,13 @@ namespace DoctorManagmentApp.Data
             //    .HasOne(a => a.Clinic)
             //    .WithMany(c => c.Appointments)
             //    .HasForeignKey(a => a.ClinicID);
+
+            //modelBuilder.Entity<Patient>().HasData(
+            //    new Patient
+            //    {
+            //        Id = 1,
+            //        Name = "Hasan Roll",
+            //    });
         }
     }
 }
