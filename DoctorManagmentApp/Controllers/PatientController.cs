@@ -1,8 +1,7 @@
 ﻿using DoctorManagmentApp.Data;
-using DoctorManagmentApp.Model;
+using DoctorManagmentApp.Model.Dto;
+using DoctorManagmentApp.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace DoctorManagmentApp.Controllers
 {
@@ -10,62 +9,49 @@ namespace DoctorManagmentApp.Controllers
     [ApiController]
     public class PatientController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
+        private readonly IPatientService patientService;
 
-        public PatientController(ApplicationDbContext context)
+        public PatientController(ApplicationDbContext context, IPatientService patientService)
         {
-            _context = context;
+            this.context = context;
+            this.patientService = patientService;
         }
 
         // GET: api/Patient
         [HttpGet]
-        public ActionResult<IEnumerable<Patient>> GetPatients()
+        public ActionResult<List<PatientDto>> GetPatients()
         {
-            return _context.Patients.ToList();
+            return patientService.GetPatients();
         }
 
         // GET: api/Patient/5
         [HttpGet("{id}")]
-        public ActionResult<Patient> GetPatient(int id)
+        public ActionResult<PatientDto> GetPatient(int id)
         {
-            var patient = _context.Patients.Find(id);
+            var patient = patientService.GetPatientById(id);
             if (patient == null)
-            {
                 return NotFound();
-            }
 
             return patient;
         }
 
         // POST: api/Patient
         [HttpPost]
-        public ActionResult<Patient> CreatePatient(Patient patient)
+        public ActionResult<PatientDto> CreatePatient(PatientDtoCreate patient)
         {
-            _context.Patients.Add(patient);
-            _context.SaveChanges();
-
-            return CreatedAtAction(nameof(GetPatient), new { id = patient.Id }, patient);
+            var createdPatient = patientService.CreatePatient(patient);
+            return CreatedAtAction(nameof(GetPatient), new { id = createdPatient.Id }, createdPatient);
         }
 
         // PUT: api/Patient/5
         [HttpPut("{id}")]
-        public IActionResult UpdatePatient(int id, Patient updatedPatient)
+        public IActionResult UpdatePatient(int id, PatientDto updatedPatient)
         {
-            var patient = _context.Patients.Find(id);
-            if (patient == null)
-            {
+            var isUpdated = patientService.UpdatePatient(id, updatedPatient);
+
+            if (!isUpdated)
                 return NotFound();
-            }
-
-            // Update patient properties
-            patient.Name = updatedPatient.Name;
-            patient.Email = updatedPatient.Email;
-            patient.Phone = updatedPatient.Phone;
-            patient.Address = updatedPatient.Address;
-            patient.Gender = updatedPatient.Gender;
-            patient.DateOfBirth = updatedPatient.DateOfBirth;
-
-            _context.SaveChanges();
 
             return NoContent();
         }
@@ -74,14 +60,10 @@ namespace DoctorManagmentApp.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeletePatient(int id)
         {
-            var patient = _context.Patients.Find(id);
-            if (patient == null)
-            {
-                return NotFound();
-            }
+            var isDeleted = patientService.DeletePatient(id);
 
-            _context.Patients.Remove(patient);
-            _context.SaveChanges();
+            if (!isDeleted)
+                return NotFound();
 
             return NoContent();
         }

@@ -1,5 +1,6 @@
 ﻿using DoctorManagmentApp.Data;
 using DoctorManagmentApp.Model;
+using DoctorManagmentApp.Model.Dto;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,20 @@ namespace DoctorManagmentApp.Controllers
 
         // GET: api/Appointment
         [HttpGet]
-        public ActionResult<IEnumerable<Appointment>> GetAppointments()
+        public ActionResult<IEnumerable<AppointmentDto>> GetAppointments()
         {
-            return _context.Appointments.ToList();
+            var appointments = _context.Appointments.Select(a => new AppointmentDto
+            {
+                Id = a.Id,
+                PatientID = a.PatientID,
+                DoctorID = a.DoctorID,
+                ClinicID = a.ClinicID,
+                AppointmentDateTime = a.AppointmentDateTime,
+                ArrivalDateTime = a.ArrivalDateTime,
+                CompletionDateTime = a.CompletionDateTime
+            }).ToList();
+
+            return appointments;
         }
 
         // GET: api/Appointment/5
@@ -49,7 +61,7 @@ namespace DoctorManagmentApp.Controllers
 
         // PUT: api/Appointment/5
         [HttpPut("{id}")]
-        public IActionResult UpdateAppointment(int id, Appointment updatedAppointment)
+        public IActionResult UpdateAppointment(int id, AppointmentDto updatedAppointment)
         {
             var appointment = _context.Appointments.Find(id);
             if (appointment == null)

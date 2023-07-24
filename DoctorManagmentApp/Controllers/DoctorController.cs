@@ -1,5 +1,6 @@
 ﻿using DoctorManagmentApp.Data;
 using DoctorManagmentApp.Model;
+using DoctorManagmentApp.Model.Dto;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,18 @@ namespace DoctorManagmentApp.Controllers
 
         // GET: api/Doctor
         [HttpGet]
-        public ActionResult<IEnumerable<Doctor>> GetDoctors()
+        public ActionResult<IEnumerable<DoctorDto>> GetDoctors()
         {
-            return _context.Doctors.ToList();
+            var doctors = _context.Doctors.Select(d => new DoctorDto
+            {
+                Id = d.Id,
+                Name = d.Name,
+                Specialization = d.Specialization,
+                Email = d.Email,
+                Phone = d.Phone
+            }).ToList();
+
+            return doctors;
         }
 
         // GET: api/Doctor/5
