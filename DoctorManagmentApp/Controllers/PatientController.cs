@@ -58,10 +58,10 @@ namespace DoctorManagmentApp.Controllers
             if (!result.IsValid)
                 return BadRequest(ApiResponse.FailResponse(result.Errors.Select(x => x.ErrorMessage).ToList()));
 
-            var isUpdated = patientService.UpdatePatient(id, updatedPatient);
+            patientService.UpdatePatient(id, updatedPatient);
 
-            if (!isUpdated)
-                return NotFound(ApiResponse.FailResponse());
+            //if (!isUpdated)
+            //    return NotFound(ApiResponse.FailResponse());
 
             return NoContent();
         }
@@ -70,10 +70,10 @@ namespace DoctorManagmentApp.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeletePatient(int id)
         {
-            var isDeleted = patientService.DeletePatient(id);
+            patientService.DeletePatient(id);
 
-            if (!isDeleted)
-                return NotFound(ApiResponse.FailResponse());
+            //if (!isDeleted)
+            //    return NotFound(ApiResponse.FailResponse());
 
             return NoContent();
         }

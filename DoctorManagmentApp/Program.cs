@@ -1,5 +1,6 @@
 using AutoMapper;
 using DoctorManagmentApp.Data;
+using DoctorManagmentApp.Middleware;
 using DoctorManagmentApp.Model.AutoMapper;
 using DoctorManagmentApp.Model.Dto;
 using DoctorManagmentApp.Services;
@@ -62,6 +63,8 @@ app.UseHttpsRedirection();
 
 // TODO: add more restriction to this to only allow the specific Origin
 app.UseCors(o => o.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().WithExposedHeaders("*"));
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // TODO: implement Authentication to protect the api
 //app.UseAuthentication();

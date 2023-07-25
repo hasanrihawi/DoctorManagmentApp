@@ -11,8 +11,8 @@ namespace DoctorManagmentApp.Services.Interface
 
         public PatientDto CreatePatient(PatientDtoNoPK patient);
 
-        bool UpdatePatient(int id, PatientDtoNoPK patient);
+        void UpdatePatient(int id, PatientDtoNoPK patient);
 
-        bool DeletePatient(int id);
+        void DeletePatient(int id);
     }
 }

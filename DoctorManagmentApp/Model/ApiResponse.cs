@@ -39,6 +39,15 @@ namespace DoctorManagmentApp.Model
             };
         }
 
+        public static ApiResponse FailResponse(string error)
+        {
+            return new ApiResponse()
+            {
+                Success = false,
+                Errors = new List<string> { error }
+            };
+        }
+
         public static ApiResponse FailResponse(List<string> errors)
         {
             return new ApiResponse()

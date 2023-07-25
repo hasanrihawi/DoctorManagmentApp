@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DoctorManagmentApp.Data;
+using DoctorManagmentApp.Exceptions;
 using DoctorManagmentApp.Model;
 using DoctorManagmentApp.Model.Dto;
 using DoctorManagmentApp.Services.Interface;
@@ -36,27 +37,24 @@ namespace DoctorManagmentApp.Services
             return mapper.Map<PatientDto>(mappedPatient);
         }
 
-        public bool UpdatePatient(int id, PatientDtoNoPK patient)
+        public void UpdatePatient(int id, PatientDtoNoPK patient)
         {
             var existingPatient = context.Patients.Find(id);
             if (existingPatient == null)
-                return false;
+                throw new NotFoundException();
 
             mapper.Map(patient, existingPatient);
             context.SaveChanges();
-
-            return true;
         }
 
-        public bool DeletePatient(int id)
+        public void DeletePatient(int id)
         {
             var patient = context.Patients.Find(id);
             if (patient == null)
-                return false;
+                throw new NotFoundException();
 
             context.Patients.Remove(patient);
             context.SaveChanges();
-            return true;
         }
     }
 }
