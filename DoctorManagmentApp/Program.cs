@@ -62,7 +62,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // TODO: add more restriction to this to only allow the specific Origin
-app.UseCors(o => o.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().WithExposedHeaders("*"));
+//app.UseCors(o => o.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().WithExposedHeaders("*"));
 
 app.UseMiddleware<ExceptionMiddleware>();
 
