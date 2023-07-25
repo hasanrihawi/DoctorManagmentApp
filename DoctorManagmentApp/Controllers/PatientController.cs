@@ -43,7 +43,6 @@ namespace DoctorManagmentApp.Controllers
         public async Task<IActionResult> CreatePatient(PatientDtoNoPK patient)
         {
             var result = await validator.ValidateAsync(patient);
-
             if (!result.IsValid)
                 return BadRequest(ApiResponse.FailResponse(result.Errors.Select(x => x.ErrorMessage).ToList()));
             
@@ -53,8 +52,12 @@ namespace DoctorManagmentApp.Controllers
 
         // PUT: api/Patient/5
         [HttpPut("{id}")]
-        public IActionResult UpdatePatient(int id, PatientDtoNoPK updatedPatient)
+        public async Task<IActionResult> UpdatePatient(int id, PatientDtoNoPK updatedPatient)
         {
+            var result = await validator.ValidateAsync(updatedPatient);
+            if (!result.IsValid)
+                return BadRequest(ApiResponse.FailResponse(result.Errors.Select(x => x.ErrorMessage).ToList()));
+
             var isUpdated = patientService.UpdatePatient(id, updatedPatient);
 
             if (!isUpdated)
