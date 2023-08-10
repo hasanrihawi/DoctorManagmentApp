@@ -1,7 +1,9 @@
-﻿using DoctorManagmentApp.Data;
+﻿using AutoMapper;
+using DoctorManagmentApp.Data;
 using DoctorManagmentApp.Model;
 using DoctorManagmentApp.Model.Dto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,25 +15,20 @@ namespace DoctorManagmentApp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<DoctorController> _logger;
+        private readonly IMapper mapper;
 
-        public DoctorController(ApplicationDbContext context, ILogger<DoctorController> logger)
+        public DoctorController(ApplicationDbContext context, ILogger<DoctorController> logger, IMapper mapper)
         {
             _context = context;
             _logger = logger;
+            this.mapper = mapper;
         }
 
         // GET: api/Doctor
         [HttpGet]
         public ActionResult<IEnumerable<DoctorDto>> GetDoctors()
         {
-            var doctors = _context.Doctors.Select(d => new DoctorDto
-            {
-                Id = d.Id,
-                Name = d.Name,
-                Specialization = d.Specialization,
-                Email = d.Email,
-                Phone = d.Phone
-            }).ToList();
+            var doctors = _context.Doctors.Include(x => x.Appointments).Select(d => mapper.Map<DoctorDto>(d)).ToList();
 
             return doctors;
         }

@@ -17,6 +17,9 @@ namespace DoctorManagmentApp.Model.Dto
 
         [Required]
         public string Phone { get; set; }
+
+        public List<AppointmentDto> Appointments { get; set; }
+
     }
 
 }

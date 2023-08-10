@@ -16,6 +16,10 @@ namespace DoctorManagmentApp.Model.AutoMapper
             CreateMap<PatientDtoNoPK, Patient>();
             CreateMap<PatientDto, Patient>();
 
+            CreateMap<Doctor, DoctorDto>();
+            CreateMap<DoctorDtoNoPK, Doctor>();
+            CreateMap<DoctorDto, Doctor>();
+
         }
     }
 }

@@ -1,5 +1,7 @@
 using AutoMapper;
+using DoctorManagmentApp.Configurations;
 using DoctorManagmentApp.Data;
+using DoctorManagmentApp.Helpers;
 using DoctorManagmentApp.Middleware;
 using DoctorManagmentApp.Model.AutoMapper;
 using DoctorManagmentApp.Model.Dto;
@@ -7,6 +9,7 @@ using DoctorManagmentApp.Services;
 using DoctorManagmentApp.Services.Interface;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,10 +24,11 @@ builder.Services.AddCors();
 
 #region Dependency Injection
 
+builder.Services.AddHttpClient();
 builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddSingleton(typeof(ApiHelper<>));
 
 #endregion
-
 
 #region FluentValidation
 
@@ -50,6 +54,12 @@ builder.Services.AddSingleton(mapper);
 
 #endregion
 
+#region AppSettings
+
+builder.Services.Configure<AppSettings>(builder.Configuration);
+
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -62,7 +72,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // TODO: add more restriction to this to only allow the specific Origin
-//app.UseCors(o => o.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().WithExposedHeaders("*"));
+app.UseCors(o => o.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().WithExposedHeaders("*"));
 
 app.UseMiddleware<ExceptionMiddleware>();
 
