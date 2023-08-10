@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace DoctorManagmentApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class ExternalApiController : ControllerBase
     {
@@ -20,22 +20,12 @@ namespace DoctorManagmentApp.Controllers
             this.appSettings = appSettings.Value;
         }
 
-        // GET: api/Patient
+        // GET: api/v1/GetPeople
         [HttpGet]
-        public async Task<IActionResult> GetPatients()
+        public async Task<IActionResult> GetPeople()
         {
-            try
-            {
-                var apiResponse = await apiHelper.CallApiAsync(appSettings.ExternalApi.Uri);
-                return Ok(ApiResponse.SuccessResponse(apiResponse));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-            //var patients = patientService.GetPatients();
-            //return Ok(ApiResponse.SuccessResponse(patients));
+            var apiResponse = await apiHelper.CallApiAsync(appSettings.ExternalApi.Uri);
+            return Ok(ApiResponse.SuccessResponse(apiResponse));
         }
 
     }

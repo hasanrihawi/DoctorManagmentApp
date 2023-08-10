@@ -25,7 +25,7 @@ namespace DoctorManagmentApp.Helpers
                 }
                 else
                 {
-                    throw new ExternalApiRequestException($"External API request failed with status code: {response.StatusCode} and content: {response.Content}");
+                    throw new ExternalApiRequestException($"Call to {response.RequestMessage.RequestUri} External API has failed with status code: {response.StatusCode}");
                 }
             }
         }
