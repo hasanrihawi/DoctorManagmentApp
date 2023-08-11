@@ -1,7 +1,7 @@
 ﻿using DoctorManagmentApp.Model.Dto;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DoctorManagmentApp.Services.Interface
+namespace DoctorManagmentApp.Infrastructure.Services.Interface
 {
     public interface IPeopleService
     {

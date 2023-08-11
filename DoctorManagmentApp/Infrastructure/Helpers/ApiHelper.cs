@@ -1,9 +1,9 @@
-﻿using DoctorManagmentApp.Configurations;
-using DoctorManagmentApp.Exceptions;
+﻿using DoctorManagmentApp.Infrastructure.Configurations;
+using DoctorManagmentApp.Infrastructure.Exceptions;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 
-namespace DoctorManagmentApp.Helpers
+namespace DoctorManagmentApp.Infrastructure.Helpers
 {
     public class ApiHelper<T>
     {

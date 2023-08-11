@@ -1,12 +1,12 @@
 using AutoMapper;
-using DoctorManagmentApp.Configurations;
 using DoctorManagmentApp.Data;
-using DoctorManagmentApp.Helpers;
-using DoctorManagmentApp.Middleware;
+using DoctorManagmentApp.Infrastructure.Configurations;
+using DoctorManagmentApp.Infrastructure.Helpers;
+using DoctorManagmentApp.Infrastructure.Middleware;
+using DoctorManagmentApp.Infrastructure.Services;
+using DoctorManagmentApp.Infrastructure.Services.Interface;
 using DoctorManagmentApp.Model.AutoMapper;
 using DoctorManagmentApp.Model.Dto;
-using DoctorManagmentApp.Services;
-using DoctorManagmentApp.Services.Interface;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

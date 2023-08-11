@@ -1,4 +1,4 @@
-﻿namespace DoctorManagmentApp.Configurations
+﻿namespace DoctorManagmentApp.Infrastructure.Configurations
 {
     public class AppSettings
     {

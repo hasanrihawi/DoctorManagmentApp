@@ -1,6 +1,6 @@
-﻿using DoctorManagmentApp.Model;
+﻿using DoctorManagmentApp.Infrastructure.Services.Interface;
+using DoctorManagmentApp.Model;
 using DoctorManagmentApp.Model.Dto;
-using DoctorManagmentApp.Services.Interface;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 

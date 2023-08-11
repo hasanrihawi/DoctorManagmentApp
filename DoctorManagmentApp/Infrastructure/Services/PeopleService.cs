@@ -1,10 +1,10 @@
-﻿using DoctorManagmentApp.Configurations;
-using DoctorManagmentApp.Helpers;
+﻿using DoctorManagmentApp.Infrastructure.Configurations;
+using DoctorManagmentApp.Infrastructure.Helpers;
+using DoctorManagmentApp.Infrastructure.Services.Interface;
 using DoctorManagmentApp.Model.Dto;
-using DoctorManagmentApp.Services.Interface;
 using Microsoft.Extensions.Options;
 
-namespace DoctorManagmentApp.Services
+namespace DoctorManagmentApp.Infrastructure.Services
 {
     public class PeopleService : IPeopleService
     {

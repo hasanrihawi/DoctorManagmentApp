@@ -1,4 +1,4 @@
-﻿namespace DoctorManagmentApp.Exceptions
+﻿namespace DoctorManagmentApp.Infrastructure.Exceptions
 {
     // Custom exceptions for different types of errors (optional).
     public class NotFoundException : Exception

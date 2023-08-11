@@ -1,7 +1,7 @@
 ﻿using DoctorManagmentApp.Model;
 using DoctorManagmentApp.Model.Dto;
 using Microsoft.AspNetCore.Mvc;
-using DoctorManagmentApp.Services.Interface;
+using DoctorManagmentApp.Infrastructure.Services.Interface;
 
 namespace DoctorManagmentApp.Controllers
 {

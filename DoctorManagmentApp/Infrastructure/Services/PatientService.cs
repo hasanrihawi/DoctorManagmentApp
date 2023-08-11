@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using DoctorManagmentApp.Data;
-using DoctorManagmentApp.Exceptions;
+using DoctorManagmentApp.Infrastructure.Exceptions;
+using DoctorManagmentApp.Infrastructure.Services.Interface;
 using DoctorManagmentApp.Model;
 using DoctorManagmentApp.Model.Dto;
-using DoctorManagmentApp.Services.Interface;
 
-namespace DoctorManagmentApp.Services
+namespace DoctorManagmentApp.Infrastructure.Services
 {
     public class PatientService : IPatientService
     {

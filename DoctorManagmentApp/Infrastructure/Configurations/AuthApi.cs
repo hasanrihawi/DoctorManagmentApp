@@ -1,8 +1,8 @@
-﻿namespace DoctorManagmentApp.Configurations
+﻿namespace DoctorManagmentApp.Infrastructure.Configurations
 {
-	public class AuthApi
+    public class AuthApi
     {
-		public string Authority { get; set; }
+        public string Authority { get; set; }
         public string ClientId { get; set; }
         public string GrantType { get; set; }
         public string ClientSecret { get; set; }

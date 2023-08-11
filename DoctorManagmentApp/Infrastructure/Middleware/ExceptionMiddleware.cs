@@ -1,9 +1,9 @@
 ﻿using System.Net;
-using DoctorManagmentApp.Exceptions;
+using DoctorManagmentApp.Infrastructure.Exceptions;
 using DoctorManagmentApp.Model;
 using Newtonsoft.Json;
 
-namespace DoctorManagmentApp.Middleware
+namespace DoctorManagmentApp.Infrastructure.Middleware
 {
     public class ExceptionMiddleware
     {
