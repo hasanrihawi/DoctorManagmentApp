@@ -44,7 +44,7 @@ namespace DoctorManagmentApp.Helpers
 
         private async Task<string> GetJwtTokenAsync()
         {
-            using (var tokenClient = new HttpClient())
+            using (var tokenClient = _httpClientFactory.CreateClient())
             {
                 var tokenRequest = new List<KeyValuePair<string, string>>()
                 {
