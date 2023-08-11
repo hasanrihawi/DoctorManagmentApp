@@ -28,7 +28,7 @@ namespace DoctorManagmentApp.Services
 
         public async Task<List<Person>> GetPeople()
         {
-            return await apiHelper.CallApiAsync(appSettings.ExternalApi.Uri);
+            return await apiHelper.CallApiAsync(appSettings.ExternalApi);
         }
     }
 }
