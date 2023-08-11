@@ -8,5 +8,7 @@
 
         public ExternalApi ExternalApi { get; set; }
 
+        public AuthApi AuthApi { get; set; }
+
     }
 }
