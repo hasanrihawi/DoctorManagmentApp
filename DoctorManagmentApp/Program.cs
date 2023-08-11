@@ -28,7 +28,7 @@ builder.Services.AddCors();
 
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IPatientService, PatientService>();
-builder.Services.AddScoped<IExternalApiService, ExternalApiService>();
+builder.Services.AddScoped<IPeopleService, PeopleService>();
 builder.Services.AddSingleton(typeof(ApiHelper<>));
 
 #endregion

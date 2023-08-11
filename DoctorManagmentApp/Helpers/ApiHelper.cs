@@ -14,7 +14,7 @@ namespace DoctorManagmentApp.Helpers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<T> CallApiAsync(ExternalApi apiSettings)
+        public async Task<T> GetAsync(ExternalApi apiSettings)
         {
             using (var client = _httpClientFactory.CreateClient())
             {

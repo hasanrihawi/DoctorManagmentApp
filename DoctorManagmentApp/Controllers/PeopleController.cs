@@ -7,11 +7,11 @@ namespace DoctorManagmentApp.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class ExternalApiController : ControllerBase
+    public class PeopleController : ControllerBase
     {
-        private readonly IExternalApiService externalApiService;
+        private readonly IPeopleService externalApiService;
 
-        public ExternalApiController(IExternalApiService externalApiService)
+        public PeopleController(IPeopleService externalApiService)
         {
             this.externalApiService = externalApiService;
         }

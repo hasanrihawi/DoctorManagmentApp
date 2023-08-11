@@ -2,6 +2,6 @@
 {
     public class AppSettings
     {
-        public ExternalApi ExternalApi { get; set; }
+        public ExternalApi PeopleApi { get; set; }
     }
 }
