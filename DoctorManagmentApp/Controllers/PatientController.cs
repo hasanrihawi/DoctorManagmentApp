@@ -59,10 +59,6 @@ namespace DoctorManagmentApp.Controllers
                 return BadRequest(ApiResponse.FailResponse(result.Errors.Select(x => x.ErrorMessage).ToList()));
 
             patientService.UpdatePatient(id, updatedPatient);
-
-            //if (!isUpdated)
-            //    return NotFound(ApiResponse.FailResponse());
-
             return NoContent();
         }
 
@@ -71,10 +67,6 @@ namespace DoctorManagmentApp.Controllers
         public IActionResult DeletePatient(int id)
         {
             patientService.DeletePatient(id);
-
-            //if (!isDeleted)
-            //    return NotFound(ApiResponse.FailResponse());
-
             return NoContent();
         }
     }
