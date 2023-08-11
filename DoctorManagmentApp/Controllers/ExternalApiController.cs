@@ -1,9 +1,7 @@
-﻿using DoctorManagmentApp.Helpers;
-using DoctorManagmentApp.Model;
+﻿using DoctorManagmentApp.Model;
 using DoctorManagmentApp.Model.Dto;
 using Microsoft.AspNetCore.Mvc;
-using DoctorManagmentApp.Configurations;
-using Microsoft.Extensions.Options;
+using DoctorManagmentApp.Services.Interface;
 
 namespace DoctorManagmentApp.Controllers
 {
@@ -11,20 +9,18 @@ namespace DoctorManagmentApp.Controllers
     [ApiController]
     public class ExternalApiController : ControllerBase
     {
-        private readonly ApiHelper<List<Person>> apiHelper;
-        private readonly AppSettings appSettings;
+        private readonly IExternalApiService externalApiService;
 
-        public ExternalApiController(ApiHelper<List<Person>> apiHelper, IOptions<AppSettings> appSettings)
+        public ExternalApiController(IExternalApiService externalApiService)
         {
-            this.apiHelper = apiHelper;
-            this.appSettings = appSettings.Value;
+            this.externalApiService = externalApiService;
         }
 
         // GET: api/v1/GetPeople
         [HttpGet]
         public async Task<IActionResult> GetPeople()
         {
-            var apiResponse = await apiHelper.CallApiAsync(appSettings.ExternalApi.Uri);
+            List<Person> apiResponse = await externalApiService.GetPeople();
             return Ok(ApiResponse.SuccessResponse(apiResponse));
         }
 
