@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DoctorManagmentApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class PatientController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace DoctorManagmentApp.Controllers
             this.validator = validator;
         }
 
-        // GET: api/Patient
+        // GET: api/v1/Patient
         [HttpGet]
         public IActionResult GetPatients()
         {
@@ -27,7 +27,7 @@ namespace DoctorManagmentApp.Controllers
             return Ok(ApiResponse.SuccessResponse(patients));
         }
 
-        // GET: api/Patient/5
+        // GET: api/v1/Patient/5
         [HttpGet("{id}")]
         public IActionResult GetPatient(int id)
         {
@@ -38,7 +38,7 @@ namespace DoctorManagmentApp.Controllers
             return Ok(ApiResponse.SuccessResponse(patient));
         }
 
-        // POST: api/Patient
+        // POST: api/v1/Patient
         [HttpPost]
         public async Task<IActionResult> CreatePatient(PatientDtoNoPK patient)
         {
@@ -50,7 +50,7 @@ namespace DoctorManagmentApp.Controllers
             return CreatedAtAction(nameof(GetPatient), new { id = createdPatient.Id }, ApiResponse.SuccessResponse(createdPatient));
         }
 
-        // PUT: api/Patient/5
+        // PUT: api/v1/Patient/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePatient(int id, PatientDtoNoPK updatedPatient)
         {
@@ -66,7 +66,7 @@ namespace DoctorManagmentApp.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Patient/5
+        // DELETE: api/v1/Patient/5
         [HttpDelete("{id}")]
         public IActionResult DeletePatient(int id)
         {
